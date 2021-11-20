@@ -1,8 +1,9 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import LandingPage from "./screens/LandingPage";
 import HeadNav from "./components/HeadNav";
-import Register from "./screens/auth/Register";
+import LandingPage from "./screens/LandingPage";
 import Login from "./screens/auth/Login";
+import Register from "./screens/auth/Register";
+import DashBoard from "./screens/dashboard/DashBoard";
 
 import "./App.css";
 import "./bootstrap.min.css";
@@ -13,9 +14,10 @@ function App() {
       <div className="App">
         <HeadNav />
         <Routes>
-          <Route path="/" component={LandingPage} />
-          <Route path="/login" component={Login} />
-          <Route path="/register" component={Register} />
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/dashboard" element={<DashBoard />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
         </Routes>
       </div>
     </BrowserRouter>
