@@ -4,13 +4,13 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { Provider } from "react-redux";
 import { ReactReduxFirebaseProvider } from "react-redux-firebase";
-import { fbconfig } from "./firebase/fbConfig";
+import firebase from "./firebase/fbConfig";
 import { store } from "./Store";
 
 const rrfConfig = {};
 
 const rrfProps = {
-  firebase: fbconfig,
+  firebase: firebase,
   config: rrfConfig,
   dispatch: store.dispatch,
 };

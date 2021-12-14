@@ -1,19 +1,12 @@
-import { createStore, combineReducers, compose } from "redux";
-import { firebaseReducer } from "react-redux-firebase";
+import { applyMiddleware, createStore } from "redux";
+import thunk from "redux-thunk";
+import rootReducer from "./reducers/index";
 
-// react-redux-firebase config
-const rrfConfig = {
-  // userProfile: "users",
-  // useFirestoreForProfile: true // Firestore for Profile instead of Realtime DB
-  // enableClaims: true // Get custom claims along with the profile
-};
+import { getFirebase } from "react-redux-firebase";
 
-// Add firebase to reducers
-const rootReducer = combineReducers({
-  firebase: firebaseReducer,
-});
+const middlewares = [thunk.withExtraArgument(getFirebase)];
 
 // Create store with reducers and initial state
 const initialState = {};
 
-export const store = createStore(rootReducer, initialState);
+export const store = createStore(rootReducer, applyMiddleware(...middlewares));

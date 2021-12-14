@@ -1,9 +1,22 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 // react-bootstrap components
 import { Container, Form, Button, Row, Col } from "react-bootstrap";
-const Register = () => {
+import { register } from "../../actions/auth";
+
+import { connect } from "react-redux";
+
+const Register = ({ register, auth }) => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const submitHandler = (e) => {
+    e.preventDefault();
+    register(email, password);
+  };
+
+  if (auth.uid) return <Navigate to="/" />;
   return (
     <div>
       <Container>
@@ -16,6 +29,8 @@ const Register = () => {
                 <Form.Control
                   type="email"
                   placeholder="Enter email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                 ></Form.Control>
               </Form.Group>
 
@@ -24,6 +39,8 @@ const Register = () => {
                 <Form.Control
                   type="password"
                   placeholder="Enter password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                 ></Form.Control>
               </Form.Group>
 
@@ -44,4 +61,11 @@ const Register = () => {
   );
 };
 
-export default Register;
+const mapStateToProps = (state) => {
+  return {
+    auth: state.firebase.auth,
+    authError: state.auth.authError,
+  };
+};
+
+export default connect(mapStateToProps, { register })(Register);

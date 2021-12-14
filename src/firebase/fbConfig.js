@@ -1,5 +1,7 @@
 // Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
+import firebase from "firebase/compat/app";
+import "firebase/compat/auth";
+import "firebase/compat/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyArgU6FOvUNehyUdlYQC9Oqyuuf4DLZGdQ",
@@ -12,4 +14,9 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-export const fbconfig = initializeApp(firebaseConfig);
+// export const fbconfig = initializeApp(firebaseConfig);
+
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+
+export default firebase;
